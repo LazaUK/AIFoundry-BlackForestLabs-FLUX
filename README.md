@@ -7,7 +7,7 @@ This demo utilises the `requests` library for direct API interaction and the `az
 ## 📑 Table of Contents:
 - [Part 1: Configuring Solution Environment](#part-1-configuring-solution-environment)
 - [Part 2: Generating Images with FLUX Models](#part-2-generating-images-with-flux-models)
-- [Part 3: Model Comparison - V1.1 Pro vs. V2 Pro]()
+- [Part 3: Model Comparison - V1.1 Pro vs. V2 Pro](#part-3-model-comparison---v11-pro-vs-v2-pro)
 
 ## Part 1: Configuring Solution Environment
 To use the notebook, set up your Azure AI Foundry environment and install the necessary Python packages.
@@ -39,8 +39,60 @@ pip install requests pillow azure-identity
 ```
 
 ## Part 2: Generating Images with FLUX Models
+The `AIFoundry_ImageGeneration_FLUX.ipynb` notebook groups the image generation logic into the following core blocks:
 
+### 2.1 Model Configuration:
+Maps model keys to specific Azure endpoints and API paths (e.g., `providers/blackforestlabs/v1/flux-pro-1.1`).
 
+``` Python
+FLUX_MODELS = {
+    "flux-1.1-pro": {
+        "endpoint": AZURE_FOUNDRY_ENDPOINT_BFL,
+        "path": f"providers/blackforestlabs/v1/flux-pro-1.1",
+        "api_version": "preview",
+        "model_name": FLUX_v1_DEPLOYMENT
+    },
+    "flux-2-pro": {
+        "endpoint": AZURE_FOUNDRY_ENDPOINT_BFL,
+        "path": f"providers/blackforestlabs/v1/flux-2-pro",
+        "api_version": "preview",
+        "model_name": FLUX_v2_DEPLOYMENT
+    }
+}
+```
+
+### 2.2 Secure Authentication:
+Obtains an Entra ID access token for the `cognitiveservices` scope.
+
+``` Python
+    credential = DefaultAzureCredential()
+    token_response = credential.get_token("https://cognitiveservices.azure.com/.default")
+```
+
+### 2.3 API Request:
+Sends a JSON POST request to the model's endpoint, incl. the `prompt` describing the desired image and parameters such as `width`, `height` and `output_format`.
+
+``` Python
+    url = f"{config['endpoint']}{config['path']}?api-version={config['api_version']}"
+    body = {
+        "prompt": prompt,
+        "n": 1,
+        "width": width,
+        "height": height,
+        "output_format": output_format,
+        "model": config["model_name"]
+    }
+```
+
+### 2.4 Response Processing:
+Decodes the b64_json image data from the response and displays it using the PIL library.
+
+``` Python
+    data = response_data['data']
+    b64_img = data[0]['b64_json']
+    image = Image.open(BytesIO(base64.b64decode(b64_img)))
+    display(image)
+```
 
 ## Part 3: Model Comparison - V1.1 Pro vs. V2 Pro
 
