@@ -5,7 +5,7 @@ This repo demonstrates how to use **FLUX** image-generation models from _Black F
 This demo utilises the `requests` library for direct API interaction and the `azure-identity` library for secure Azure Entra ID authentication.
 
 ## 📑 Table of Contents:
-- [Part 1: Configuring Solution Environment]()
+- [Part 1: Configuring Solution Environment](#part-1-configuring-solution-environment)
 - [Part 2: Generating Images with FLUX Models]()
 - [Part 3: Model Comparison - V1.1 Pro vs. V2 Pro]()
 
