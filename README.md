@@ -102,7 +102,7 @@ While both models are available via Azure AI Foundry, they differ in resolution 
 |                       | FLUX 1.1 Pro                              | FLUX 2 Pro                              |
 | --------------------- | ----------------------------------------- | --------------------------------------- |
 | BFL API Path          | providers/blackforestlabs/v1/flux-pro-1.1 | providers/blackforestlabs/v1/flux-2-pro |
-| Max Resolution        | Up to 1.6MP                               | Up to 4MP                               |
+| Max Resolution        | Up to 1.6 MP                              | Up to 4 MP                              |
 | OpenAI-Compatible API | Supported                                 | Not supported                           |
 | BFL Native API        | Supported                                 | Supported                               |
 
