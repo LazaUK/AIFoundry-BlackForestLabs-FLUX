@@ -48,13 +48,13 @@ Maps model keys to specific Azure endpoints and API paths (e.g., `providers/blac
 FLUX_MODELS = {
     "flux-1.1-pro": {
         "endpoint": AZURE_FOUNDRY_ENDPOINT_BFL,
-        "path": f"providers/blackforestlabs/v1/flux-pro-1.1",
+        "path": "providers/blackforestlabs/v1/flux-pro-1.1",
         "api_version": "preview",
         "model_name": FLUX_v1_DEPLOYMENT
     },
     "flux-2-pro": {
         "endpoint": AZURE_FOUNDRY_ENDPOINT_BFL,
-        "path": f"providers/blackforestlabs/v1/flux-2-pro",
+        "path": "providers/blackforestlabs/v1/flux-2-pro",
         "api_version": "preview",
         "model_name": FLUX_v2_DEPLOYMENT
     }
