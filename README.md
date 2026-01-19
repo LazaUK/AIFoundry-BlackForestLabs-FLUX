@@ -96,7 +96,8 @@ Decodes the b64_json image data from the response and displays it using the PIL 
 
 ## Part 3: Model Comparison - V1.1 Pro vs. V2 Pro
 
-### 3.1 While both models are available via Azure AI Foundry, they differ in resolution capabilities and API compatibility:
+### 3.1 Features Comparison
+While both models are available via Azure AI Foundry, they differ in resolution capabilities and API compatibility:
 
 |                       | FLUX 1.1 Pro                              | FLUX 2 Pro                              |
 | --------------------- | ----------------------------------------- | --------------------------------------- |
