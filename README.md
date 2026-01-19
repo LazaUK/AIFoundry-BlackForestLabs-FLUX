@@ -1,4 +1,4 @@
-# Azure AI Foundry: Image Generation with Black Forest Labs' FLUX models
+# Image Generation with Black Forest Labs' FLUX models
 
 This repo demonstrates how to use **FLUX** image-generation models from _Black Forest Labs_ in Azure AI Foundry. The provided Jupyter notebook showcases how to create high-quality images from textual prompts.
 
