@@ -20,7 +20,8 @@ This demo uses **Azure Entra ID** authentication via `DefaultAzureCredential` fr
 
 To make it work, ensure your environment is set up for Azure authentication, e.g., by logging in via `az login` (Azure CLI) or setting relevant environment variables for service principals.
 
-### 1.3 Environment VariablesSet the following environment variables to point to your Azure AI Foundry endpoint and deployments:
+### 1.3 Environment Variables
+Set the following environment variables to point to your Azure AI Foundry endpoint and deployments:
 
 | Environment Variable       |  Description                                                                               |
 | -------------------------- | ------------------------------------------------------------------------------------------ |
