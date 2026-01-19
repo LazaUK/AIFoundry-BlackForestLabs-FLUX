@@ -96,3 +96,27 @@ Decodes the b64_json image data from the response and displays it using the PIL 
 
 ## Part 3: Model Comparison - V1.1 Pro vs. V2 Pro
 
+### 3.1 While both models are available via Azure AI Foundry, they differ in resolution capabilities and API compatibility:
+
+|                       | FLUX 1.1 Pro                              | FLUX 2 Pro                              |
+| --------------------- | ----------------------------------------- | --------------------------------------- |
+| BFL API Path          | providers/blackforestlabs/v1/flux-pro-1.1 | providers/blackforestlabs/v1/flux-2-pro |
+| Max Resolution        | Up to 1.6MP                               | Up to 4MP                               |
+| OpenAI-Compatible API | Supported                                 | Not supported                           |
+| BFL Native API        | Supported                                 | Supported                               |
+
+### 3.2 Image Generation by FLUX-1.1-Pro
+
+``` JSON
+Portrait of a red panda in renaissance clothing in Rembrandt style, detailed, intricate, digital art
+```
+
+![IMAGE_REMBRANDT_FLUX1.1](images/Style_Rembrandt.png)
+
+### 3.3 Image Generation by FLUX-2-Pro
+
+``` JSON
+Portrait of a red panda in renaissance clothing in Vermeer style, detailed, intricate, digital art
+```
+
+![IMAGE_VERMEER_FLUX2](images/Style_Vermeer.png)
