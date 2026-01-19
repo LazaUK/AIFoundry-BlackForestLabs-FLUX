@@ -61,6 +61,9 @@ FLUX_MODELS = {
 }
 ```
 
+> [!WARNING]
+> Please, ensure that the name of your model deployment is passed in lower case.
+
 ### 2.2 Secure Authentication:
 Obtains an Entra ID access token for the `cognitiveservices` scope.
 
