@@ -8,7 +8,7 @@ This demo utilises the `requests` library for direct API interaction and the `az
 - [Part 1: Configuring Solution Environment](#part-1-configuring-solution-environment)
 - [Part 2: Generating Images with FLUX Models](#part-2-generating-images-with-flux-models)
 - [Part 3: Editing Images with FLUX Models](#part-3-editing-images-with-flux-models)
-- [Part 4: Model Comparison - V1.1 Pro, V1 Kontext and V2 Pro](#part-4-model-comparison---v11-pro-v1-kontext-and-v2-pro)
+- [Part 4: Model Comparison - v1.1 Pro, v1 Kontext and v2 Pro](#part-4-model-comparison---v11-pro-v1-kontext-and-v2-pro)
 
 ## Part 1: Configuring Solution Environment
 To use the notebook, set up your Azure AI Foundry environment and install the necessary Python packages.
@@ -75,33 +75,33 @@ FLUX_MODELS = {
 Obtain an Entra ID access token for the `cognitiveservices` scope.
 
 ``` Python
-    credential = DefaultAzureCredential()
-    token_response = credential.get_token("https://cognitiveservices.azure.com/.default")
+credential = DefaultAzureCredential()
+token_response = credential.get_token("https://cognitiveservices.azure.com/.default")
 ```
 
 ### 2.3 API Request:
 Send a JSON POST request to the model's endpoint, incl. the `prompt` describing the desired image and parameters such as `width`, `height` and `output_format`.
 
 ``` Python
-    url = f"{config['endpoint']}{config['path']}?api-version={config['api_version']}"
-    body = {
-        "prompt": prompt,
-        "n": 1,
-        "width": width,
-        "height": height,
-        "output_format": output_format,
-        "model": config["model_name"]
-    }
+url = f"{config['endpoint']}{config['path']}?api-version={config['api_version']}"
+body = {
+    "prompt": prompt,
+    "n": 1,
+    "width": width,
+    "height": height,
+    "output_format": output_format,
+    "model": config["model_name"]
+}
 ```
 
 ### 2.4 Response Processing:
 Decode the b64_json image data from the response and displays it using the PIL library.
 
 ``` Python
-    data = response_data['data']
-    b64_img = data[0]['b64_json']
-    image = Image.open(BytesIO(base64.b64decode(b64_img)))
-    display(image)
+data = response_data['data']
+b64_img = data[0]['b64_json']
+image = Image.open(BytesIO(base64.b64decode(b64_img)))
+display(image)
 ```
 
 ## Part 3: Editing Images with FLUX Models
@@ -120,17 +120,17 @@ def load_image_as_base64(image_path):
 The request body for editing requires the `input_image` parameter along with standard generation parameters.
 
 ``` Python
-    body = {
-        "prompt": prompt,
-        "input_image": input_image_b64,
-        "width": width,
-        "height": height,
-        "output_format": output_format,
-        "model": config["model_name"]
-    }
+body = {
+    "prompt": prompt,
+    "input_image": input_image_b64,
+    "width": width,
+    "height": height,
+    "output_format": output_format,
+    "model": config["model_name"]
+}
 ```
 
-## Part 4: Model Comparison - V1.1 Pro, V1 Kontext and V2 Pro
+## Part 4: Model Comparison - v1.1 Pro, v1 Kontext and v2 Pro
 
 ### 4.1 Features Comparison
 While all three models are available via Azure AI Foundry, they differ in resolution capabilities and API compatibility:
@@ -165,7 +165,10 @@ Portrait of a red panda in renaissance clothing in Vermeer style, detailed, intr
 ![Source_ZenMaster](images/Source_ZenMaster.png)
 
 - **Prompt:**
-*"Change the weather to snowing, add snowflakes falling, winter atmosphere, keep the red panda in the same pose"*.
+
+``` JSON
+"Change the weather to snowing, add snowflakes falling, winter atmosphere, keep the red panda in the same pose"
+```
 
 - **Edited Result:**
 ![Output_ZenMaster](images/Output_ZenMaster.png)
