@@ -8,7 +8,7 @@ This demo utilises the `requests` library for direct API interaction and the `az
 - [Part 1: Configuring Solution Environment](#part-1-configuring-solution-environment)
 - [Part 2: Generating Images with FLUX Models](#part-2-generating-images-with-flux-models)
 - [Part 3: Image Editing with FLUX Models](#part-3-image-editing-with-flux-models)
-- [Part 4: Model Comparison - V1.1 Pro, V1 Kontext and V2 Pro]()
+- [Part 4: Model Comparison - V1.1 Pro, V1 Kontext and V2 Pro](#part-4-model-comparison---v11-pro-v1-kontext-and-v2-pro)
 
 ## Part 1: Configuring Solution Environment
 To use the notebook, set up your Azure AI Foundry environment and install the necessary Python packages.
@@ -156,10 +156,10 @@ Portrait of a red panda in renaissance clothing in Vermeer style, detailed, intr
 ### 4.4 Image Editing by FLUX-1-Kontext-Pro
 
 - **Source Image:**
-![Source_ZenMaster](images/Source_ZenMaster.jpg)
+![Source_ZenMaster](images/Source_ZenMaster.png)
 
 - **Prompt:**
 *"Change the weather to snowing, add snowflakes falling, winter atmosphere, keep the red panda in the same pose"*.
 
 - **Edited Result:**
-![Output_ZenMaster](images/Output_ZenMaster.jpg)
+![Output_ZenMaster](images/Output_ZenMaster.png)
