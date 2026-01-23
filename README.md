@@ -1,19 +1,20 @@
-# Image Generation with Black Forest Labs' FLUX models
+# Image Generation and Editing with Black Forest Labs' FLUX models
 
-This repo demonstrates how to use **FLUX** image-generation models from _Black Forest Labs_ in Azure AI Foundry. The provided Jupyter notebook showcases how to create high-quality images from textual prompts.
+This repo demonstrates how to use **FLUX** image-generation and image-editing models from _Black Forest Labs_ in Azure AI Foundry. The provided Jupyter notebooks showcases how to create or edit high-quality images with textual prompts.
 
 This demo utilises the `requests` library for direct API interaction and the `azure-identity` library for secure Azure Entra ID authentication.
 
 ## 📑 Table of Contents:
 - [Part 1: Configuring Solution Environment](#part-1-configuring-solution-environment)
 - [Part 2: Generating Images with FLUX Models](#part-2-generating-images-with-flux-models)
-- [Part 3: Model Comparison - V1.1 Pro vs. V2 Pro](#part-3-model-comparison---v11-pro-vs-v2-pro)
+- [Part 3: Image Editing with FLUX Models]()
+- [Part 4: Model Comparison - V1.1 Pro, V1 Kontext and V2 Pro]()
 
 ## Part 1: Configuring Solution Environment
 To use the notebook, set up your Azure AI Foundry environment and install the necessary Python packages.
 
 ### 1.1 Azure AI Foundry Setup
-Ensure you have an Azure AI Foundry project with the FLUX-1.1-pro or FLUX-2-pro models deployed.
+Ensure you have an Azure AI Foundry project with the FLUX-1.1-pro, FLUX-1-Kontext-pro or FLUX-2-pro models deployed.
 
 ### 1.2 Authentication
 This demo uses **Azure Entra ID** authentication via `DefaultAzureCredential` from `azure.identity`. This credential type automatically handles various authentication methods.
@@ -29,7 +30,7 @@ Set the following environment variables to point to your Azure AI Foundry endpoi
 | Environment Variable       |  Description                                                                               |
 | -------------------------- | ------------------------------------------------------------------------------------------ |
 | AZURE_FOUNDRY_ENDPOINT_BFL | Your Azure AI Foundry endpoint URL (e.g., https://<YOUR_RESOURCE>.services.ai.azure.com/). |
-| FLUX_v1_DEPLOYMENT         | The name of your FLUX 1.1 Pro deployment.                                                  |
+| FLUX_v1_DEPLOYMENT         | The name of your FLUX 1.1 Pro (Generation) or FLUX 1 Kontext Pro (Editing) deployment.     |
 | FLUX_v2_DEPLOYMENT         | The name of your FLUX 2 Pro deployment.                                                    |
 
 ### 1.4 Install Required Python packages
@@ -39,10 +40,10 @@ pip install requests pillow azure-identity
 ```
 
 ## Part 2: Generating Images with FLUX Models
-The `AIFoundry_ImageGeneration_FLUX.ipynb` notebook groups the image generation logic into the following core blocks:
+The `AIFoundry_ImageGeneration_FLUX.ipynb` notebook demonstrates how to create high-quality images using a text prompt.
 
 ### 2.1 Model Configuration:
-Maps model keys to specific Azure endpoints and API paths (e.g., `providers/blackforestlabs/v1/flux-pro-1.1`).
+Map model keys to specific Azure endpoints and API paths (e.g., `providers/blackforestlabs/v1/flux-pro-1.1`).
 
 ``` Python
 FLUX_MODELS = {
@@ -65,7 +66,7 @@ FLUX_MODELS = {
 > Please, ensure that the name of your model deployment is passed in lower case.
 
 ### 2.2 Secure Authentication:
-Obtains an Entra ID access token for the `cognitiveservices` scope.
+Obtain an Entra ID access token for the `cognitiveservices` scope.
 
 ``` Python
     credential = DefaultAzureCredential()
@@ -73,7 +74,7 @@ Obtains an Entra ID access token for the `cognitiveservices` scope.
 ```
 
 ### 2.3 API Request:
-Sends a JSON POST request to the model's endpoint, incl. the `prompt` describing the desired image and parameters such as `width`, `height` and `output_format`.
+Send a JSON POST request to the model's endpoint, incl. the `prompt` describing the desired image and parameters such as `width`, `height` and `output_format`.
 
 ``` Python
     url = f"{config['endpoint']}{config['path']}?api-version={config['api_version']}"
@@ -88,7 +89,7 @@ Sends a JSON POST request to the model's endpoint, incl. the `prompt` describing
 ```
 
 ### 2.4 Response Processing:
-Decodes the b64_json image data from the response and displays it using the PIL library.
+Decode the b64_json image data from the response and displays it using the PIL library.
 
 ``` Python
     data = response_data['data']
@@ -97,9 +98,22 @@ Decodes the b64_json image data from the response and displays it using the PIL 
     display(image)
 ```
 
-## Part 3: Model Comparison - V1.1 Pro vs. V2 Pro
+## Part 3: Image Editing with FLUX Models
+The `AIFoundry_ImageEditing_FLUX.ipynb` notebook demonstrates how to modify images using a reference image and a text prompt.
 
-### 3.1 Features Comparison
+### 3.1 Input Image Preparation
+For editing, the source image must be converted to a base64 encoded string. The notebook utilises the following helper function to handle such operation:
+
+```python
+def load_image_as_base64(image_path):
+    with open(image_path, "rb") as image_file:
+        return base64.b64encode(image_file.read()).decode("utf-8")
+```
+
+
+## Part 4: Model Comparison - V1.1 Pro, V1 Kontext and V2 Pro
+
+### 4.1 Features Comparison
 While both models are available via Azure AI Foundry, they differ in resolution capabilities and API compatibility:
 
 |                       | FLUX 1.1 Pro                              | FLUX 2 Pro                              |
@@ -109,7 +123,7 @@ While both models are available via Azure AI Foundry, they differ in resolution 
 | OpenAI-Compatible API | Supported                                 | Not supported                           |
 | BFL Native API        | Supported                                 | Supported                               |
 
-### 3.2 Image Generation by FLUX-1.1-Pro
+### 4.2 Image Generation by FLUX-1.1-Pro
 
 ``` JSON
 Portrait of a red panda in renaissance clothing in Rembrandt style, detailed, intricate, digital art
@@ -117,7 +131,7 @@ Portrait of a red panda in renaissance clothing in Rembrandt style, detailed, in
 
 ![IMAGE_REMBRANDT_FLUX1.1](images/Style_Rembrandt.png)
 
-### 3.3 Image Generation by FLUX-2-Pro
+### 4.3 Image Generation by FLUX-2-Pro
 
 ``` JSON
 Portrait of a red panda in renaissance clothing in Vermeer style, detailed, intricate, digital art
