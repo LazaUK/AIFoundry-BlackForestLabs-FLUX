@@ -7,7 +7,7 @@ This demo utilises the `requests` library for direct API interaction and the `az
 ## 📑 Table of Contents:
 - [Part 1: Configuring Solution Environment](#part-1-configuring-solution-environment)
 - [Part 2: Generating Images with FLUX Models](#part-2-generating-images-with-flux-models)
-- [Part 3: Image Editing with FLUX Models]()
+- [Part 3: Image Editing with FLUX Models](#part-3-image-editing-with-flux-models)
 - [Part 4: Model Comparison - V1.1 Pro, V1 Kontext and V2 Pro]()
 
 ## Part 1: Configuring Solution Environment
@@ -102,7 +102,7 @@ Decode the b64_json image data from the response and displays it using the PIL l
 The `AIFoundry_ImageEditing_FLUX.ipynb` notebook demonstrates how to modify images using a reference image and a text prompt.
 
 ### 3.1 Input Image Preparation
-For editing, the source image must be converted to a base64 encoded string. The notebook utilises the following helper function to handle such operation:
+For editing, the source image must be converted to a base64 encoded string. The notebook utilises the following helper function to handle it.
 
 ```python
 def load_image_as_base64(image_path):
@@ -110,18 +110,32 @@ def load_image_as_base64(image_path):
         return base64.b64encode(image_file.read()).decode("utf-8")
 ```
 
+### 3.2 API Request for Editing
+The request body for editing requires the `input_image` parameter along with standard generation parameters.
+
+``` Python
+    body = {
+        "prompt": prompt,
+        "input_image": input_image_b64,
+        "width": width,
+        "height": height,
+        "output_format": output_format,
+        "model": config["model_name"]
+    }
+```
 
 ## Part 4: Model Comparison - V1.1 Pro, V1 Kontext and V2 Pro
 
 ### 4.1 Features Comparison
-While both models are available via Azure AI Foundry, they differ in resolution capabilities and API compatibility:
+While all three models are available via Azure AI Foundry, they differ in resolution capabilities and API compatibility:
 
-|                       | FLUX 1.1 Pro                              | FLUX 2 Pro                              |
-| --------------------- | ----------------------------------------- | --------------------------------------- |
-| BFL API Path          | providers/blackforestlabs/v1/flux-pro-1.1 | providers/blackforestlabs/v1/flux-2-pro |
-| Max Resolution        | Up to 1.6 MP                              | Up to 4 MP                              |
-| OpenAI-Compatible API | Supported                                 | Not supported                           |
-| BFL Native API        | Supported                                 | Supported                               |
+| Feature               | FLUX 1.1 Pro         | FLUX 1 Kontext Pro      | FLUX 2 Pro              |
+| --------------------- | -------------------- | ----------------------- | ----------------------- |
+| BFL API Path          | `.../flux-pro-1.1`   | `.../flux-kontext-pro`  | `.../flux-2-pro`        |
+| Max Resolution        | Up to 1.6 MP         | Up to 1.0 MP            | Up to 4.0 MP            |
+| Image Editing         | Not supported        | Supported               | Supported               |
+| OpenAI-Compatible API | Supported            | Supported               | Not supported           |
+| BFL Native API        | Supported            | Supported               | Supported               |
 
 ### 4.2 Image Generation by FLUX-1.1-Pro
 
@@ -138,3 +152,14 @@ Portrait of a red panda in renaissance clothing in Vermeer style, detailed, intr
 ```
 
 ![IMAGE_VERMEER_FLUX2](images/Style_Vermeer.png)
+
+### 4.4 Image Editing by FLUX-1-Kontext-Pro
+
+- **Source Image:**
+![Source_ZenMaster](images/Source_ZenMaster.jpg)
+
+- **Prompt:**
+*"Change the weather to snowing, add snowflakes falling, winter atmosphere, keep the red panda in the same pose"*.
+
+- **Edited Result:**
+![Output_ZenMaster](images/Output_ZenMaster.jpg)
