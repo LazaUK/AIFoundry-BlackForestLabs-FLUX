@@ -7,7 +7,7 @@ This demo utilises the `requests` library for direct API interaction and the `az
 ## 📑 Table of Contents:
 - [Part 1: Configuring Solution Environment](#part-1-configuring-solution-environment)
 - [Part 2: Generating Images with FLUX Models](#part-2-generating-images-with-flux-models)
-- [Part 3: Image Editing with FLUX Models](#part-3-image-editing-with-flux-models)
+- [Part 3: Editing Images with FLUX Models](#part-3-editing-images-with-flux-models)
 - [Part 4: Model Comparison - V1.1 Pro, V1 Kontext and V2 Pro](#part-4-model-comparison---v11-pro-v1-kontext-and-v2-pro)
 
 ## Part 1: Configuring Solution Environment
@@ -98,7 +98,7 @@ Decode the b64_json image data from the response and displays it using the PIL l
     display(image)
 ```
 
-## Part 3: Image Editing with FLUX Models
+## Part 3: Editing Images with FLUX Models
 The `AIFoundry_ImageEditing_FLUX.ipynb` notebook demonstrates how to modify images using a reference image and a text prompt.
 
 ### 3.1 Input Image Preparation
