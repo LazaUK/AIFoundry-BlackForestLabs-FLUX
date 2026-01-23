@@ -53,6 +53,12 @@ FLUX_MODELS = {
         "api_version": "preview",
         "model_name": FLUX_v1_DEPLOYMENT
     },
+    "flux-kontext-pro": {
+        "endpoint": AZURE_FOUNDRY_ENDPOINT_BFL,
+        "path": f"providers/blackforestlabs/v1/flux-kontext-pro",
+        "api_version": "preview",
+        "model_name": FLUX_v1_DEPLOYMENT
+    },
     "flux-2-pro": {
         "endpoint": AZURE_FOUNDRY_ENDPOINT_BFL,
         "path": "providers/blackforestlabs/v1/flux-2-pro",
